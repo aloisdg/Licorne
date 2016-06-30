@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Licorne.Sample": {
+      "commandName": "Project",
+      "commandLineArgs": "hsl 289 88 51"
+    }
+  }
+}
