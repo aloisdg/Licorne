@@ -25,6 +25,6 @@ HSL is an widely, easy and readable alternative to plain RGB. You can find it an
 
 Like Unicorn, HSL is perfect and like unicorn they may not be suitable for the real world. Human's vision is not perfect. All hues are not born equals for us. Some great peoples try to fix this issue to get a better output. You can move outside sRGB with the CIE or use an adaptaion of HSL to handle the human factor. This adaptation is named [HUSL](http://www.husl-colors.org/) and their is a [C# implementation](https://github.com/husl-colors/husl-csharp). If like myslef, HSL works for you keep it, if you need or want more you may want to switch to HUSL.
 
-## Inspiration
+## Acknowledgement
 
 This project is inspired by the implementation of [Rich Newman](https://richnewman.wordpress.com/about/code-listings-and-diagrams/hslcolor-class/), [ColorMine](https://github.com/THEjoezack/ColorMine) and [Bob Powell](https://web.archive.org/web/20110425154034/http://bobpowell.net/RGBHSB.htm).
