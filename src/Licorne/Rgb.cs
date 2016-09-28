@@ -20,106 +20,52 @@ namespace Licorne {
         }
 
         public Rgb(Hsl color) {
-            throw new System.NotImplementedException ();
+            var rangedH = color.H / 360.0;
+            var r = 0.0;
+            var g = 0.0;
+            var b = 0.0;
+            var saturation = color.S / 100.0;
+            var luminosity = color.L / 100.0;
+
+            if (BasicallyEqualTo (luminosity, 0)) {
+                R = 255.0 * r;
+                G = 255.0 * g;
+                B = 255.0 * b;
+            }
+            else {
+                if (BasicallyEqualTo (saturation, 0))
+                    r = g = b = luminosity;
+                else {
+                    var temp2 = luminosity * (luminosity < 0.5
+                        ? 1.0 + saturation
+                        : 1.0 - saturation + saturation / luminosity);
+                    var temp1 = 2.0 * luminosity - temp2;
+
+                    r = GetColorComponent (temp1, temp2, rangedH + 1.0 / 3.0);
+                    g = GetColorComponent (temp1, temp2, rangedH);
+                    b = GetColorComponent (temp1, temp2, rangedH - 1.0 / 3.0);
+                }
+                R = 255.0 * r;
+                G = 255.0 * g;
+                B = 255.0 * b;
+            }
         }
 
-        public float GetBrightness() {
-            var r = (float) R / 255.0f;
-            var g = (float) G / 255.0f;
-            var b = (float) B / 255.0f;
-
-            float max, min;
-
-            max = r;
-            min = r;
-
-            if (g > max)
-                max = g;
-            if (b > max)
-                max = b;
-
-            if (g < min)
-                min = g;
-            if (b < min)
-                min = b;
-
-            return (max + min) / 2;
+        private static double GetColorComponent(double temp1, double temp2, double temp3) {
+            var temp3InRange = temp3 + (temp3 < 0.0 ? 1 : (temp3 > 1.0 ? -1 : 0));
+            if (temp3InRange < 1.0 / 6.0)
+                return temp1 + (temp2 - temp1) * 6.0 * temp3InRange;
+            if (temp3InRange < 0.5)
+                return temp2;
+            if (temp3 < 2.0 / 3.0)
+                return temp1 + (temp2 - temp1) * 6.0 * (2.0 / 3.0 - temp3InRange);
+            return temp1;
         }
 
-        ///<summary>
-        /// The Hue-Saturation-Brightness (HSB) saturation for this
-        ///</summary>
-        public float GetSaturation() {
-            var r = (float) R / 255.0f;
-            var g = (float) G / 255.0f;
-            var b = (float) B / 255.0f;
+        private const double DefaultPrecision = .0001;
 
-            float max, min;
-
-            max = r;
-            min = r;
-
-            if (g > max)
-                max = g;
-            if (b > max)
-                max = b;
-
-            if (g < min)
-                min = g;
-            if (b < min)
-                min = b;
-
-            // if max == min, then there is no color and
-            // the saturation is zero.
-            if (max == min)
-                return 0;
-            var l = (max + min) / 2;
-            var s = (max - min) / (l <= .5 ? (max + min) : (2 - max - min)); // float
-            return s;
-        }
-
-        public float GetHue() {
-            if (R == G && G == B)
-                return 0; // 0 makes as good an UNDEFINED value as any
-
-            var r = (float) R / 255.0f;
-            var g = (float) G / 255.0f;
-            var b = (float) B / 255.0f;
-
-            float max, min;
-            float delta;
-            var hue = 0.0f;
-
-            max = r;
-            min = r;
-
-            if (g > max)
-                max = g;
-            if (b > max)
-                max = b;
-
-            if (g < min)
-                min = g;
-            if (b < min)
-                min = b;
-
-            delta = max - min;
-
-            if (r == max) {
-                hue = (g - b) / delta;
-            }
-            else if (g == max) {
-                hue = 2 + (b - r) / delta;
-            }
-            else if (b == max) {
-                hue = 4 + (r - g) / delta;
-            }
-            hue *= 60;
-
-            if (hue < 0.0f) {
-                hue += 360.0f;
-            }
-            return hue;
+        private static bool BasicallyEqualTo(double a, double b, double precision = DefaultPrecision) {
+            return System.Math.Abs (a - b) <= precision;
         }
     }
 }
