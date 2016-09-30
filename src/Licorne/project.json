@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "0.1.0-*",
 
   "dependencies": {
     "NETStandard.Library": "1.6.0"
@@ -8,6 +8,20 @@
   "frameworks": {
     "netstandard1.6": {
       "imports": "dnxcore50"
+    }
+  },
+  "packOptions": {
+    "summary": "Licorne is a Little Color Reorganizer for the .Net Ecosystem ",
+    "tags": [ "hsl", "rgb", "color" ],
+    "owners": [ "aloisdg" ],
+    "releaseNotes": "Initial version, implemented basic constructor based conversion.",
+    "iconUrl": "https://github.com/aloisdg/Licorne/blob/master/g5168.png",
+    "projectUrl": "https://github.com/aloisdg/Licorne",
+    "licenseUrl": "https://github.com/aloisdg/Licorne/blob/master/License",
+    "requireLicenseAcceptance": true,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/aloisdg/Licorne"
     }
   }
 }

@@ -1,8 +1,10 @@
 // Licorne Is Colors Of Rgb Naturally Easy
 // LIght COlor Rendered Naive & Easy
 
+using System;
+
 namespace Licorne {
-    public class Rgb {
+    public class Rgb : IEquatable<Rgb> {
         public double R { get; }
         public double G { get; }
         public double B { get; }
@@ -13,11 +15,7 @@ namespace Licorne {
             B = b;
         }
 
-        public Rgb(Rgb color) {
-            R = color.R;
-            G = color.G;
-            B = color.B;
-        }
+        public Rgb(Rgb color) : this (color.R, color.G, color.B) { }
 
         public Rgb(Hsl color) {
             var rangedH = color.H / 360.0;
@@ -27,13 +25,8 @@ namespace Licorne {
             var saturation = color.S / 100.0;
             var luminosity = color.L / 100.0;
 
-            if (BasicallyEqualTo (luminosity, 0)) {
-                R = 255.0 * r;
-                G = 255.0 * g;
-                B = 255.0 * b;
-            }
-            else {
-                if (BasicallyEqualTo (saturation, 0))
+            if (!luminosity.BasicallyEqualTo (0)) {
+                if (saturation.BasicallyEqualTo (0))
                     r = g = b = luminosity;
                 else {
                     var temp2 = luminosity * (luminosity < 0.5
@@ -45,10 +38,10 @@ namespace Licorne {
                     g = GetColorComponent (temp1, temp2, rangedH);
                     b = GetColorComponent (temp1, temp2, rangedH - 1.0 / 3.0);
                 }
-                R = 255.0 * r;
-                G = 255.0 * g;
-                B = 255.0 * b;
             }
+            R = 255.0 * r;
+            G = 255.0 * g;
+            B = 255.0 * b;
         }
 
         private static double GetColorComponent(double temp1, double temp2, double temp3) {
@@ -62,10 +55,40 @@ namespace Licorne {
             return temp1;
         }
 
-        private const double DefaultPrecision = .0001;
+        public override string ToString() {
+            return $"rgb({R:#0},{G:#0},{B:#0})";
+        }
 
-        private static bool BasicallyEqualTo(double a, double b, double precision = DefaultPrecision) {
-            return System.Math.Abs (a - b) <= precision;
+        public override bool Equals(object obj) {
+            if (!(obj is Rgb))
+                return false;
+            var rgb = (Rgb) obj;
+            return R == rgb.R && G == rgb.G && B == rgb.B;
+        }
+
+        public bool Equals(Rgb other) {
+            if (ReferenceEquals (null, other))
+                return false;
+            if (ReferenceEquals (this, other))
+                return true;
+            return R.Equals (other.R) && G.Equals (other.G) && B.Equals (other.B);
+        }
+
+        public override int GetHashCode() {
+            unchecked {
+                var hashCode = R.GetHashCode ();
+                hashCode = (hashCode * 397) ^ G.GetHashCode ();
+                hashCode = (hashCode * 397) ^ B.GetHashCode ();
+                return hashCode;
+            }
+        }
+
+        public static bool operator ==(Rgb left, Rgb right) {
+            return Equals (left, right);
+        }
+
+        public static bool operator !=(Rgb left, Rgb right) {
+            return !Equals (left, right);
         }
     }
 }

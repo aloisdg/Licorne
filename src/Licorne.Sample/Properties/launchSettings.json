@@ -2,7 +2,7 @@
   "profiles": {
     "Licorne.Sample": {
       "commandName": "Project",
-      "commandLineArgs": "hsl 289 88 51"
+      "commandLineArgs": "hsl 288.8 88 51"
     }
   }
 }

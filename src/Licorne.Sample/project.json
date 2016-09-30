@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.1.0-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "Licorne": "1.0.0-*",
+    "Licorne": "0.1.0-*",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.0"
