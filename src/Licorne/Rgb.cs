@@ -6,10 +6,14 @@ using System;
 namespace Licorne {
     public class Rgb : IEquatable<Rgb> {
         public double R { get; }
+
         public double G { get; }
         public double B { get; }
 
         public Rgb(double r, double g, double b) {
+            if (r < 0 || r > 255) throw new ArgumentOutOfRangeException (nameof (r));
+            if (g < 0 || g > 255) throw new ArgumentOutOfRangeException (nameof (g));
+            if (b < 0 || b > 255) throw new ArgumentOutOfRangeException (nameof (b));
             R = r;
             G = g;
             B = b;

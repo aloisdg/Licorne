@@ -7,6 +7,12 @@ namespace Licorne {
         public double L { get; }
 
         public Hsl(double h, double s, double l) {
+            if (h < 0 || h > 360)
+                throw new ArgumentOutOfRangeException (nameof (h));
+            if (s < 0 || s > 100)
+                throw new ArgumentOutOfRangeException (nameof (s));
+            if (l < 0 || l > 100)
+                throw new ArgumentOutOfRangeException (nameof (l));
             H = h;
             S = s;
             L = l;
