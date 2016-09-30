@@ -11,11 +11,11 @@
     }
   },
   "packOptions": {
-    "summary": "Licorne is a Little Color Reorganizer for the .Net Ecosystem ",
+    "summary": "Licorne is a Little Color Reorganizer for the .Net Ecosystem",
     "tags": [ "hsl", "rgb", "color" ],
     "owners": [ "aloisdg" ],
     "releaseNotes": "Initial version, implemented basic constructor based conversion.",
-    "iconUrl": "https://github.com/aloisdg/Licorne/blob/master/g5168.png",
+    "iconUrl": "https://github.com/aloisdg/Licorne/blob/master/logo.png",
     "projectUrl": "https://github.com/aloisdg/Licorne",
     "licenseUrl": "https://github.com/aloisdg/Licorne/blob/master/License",
     "requireLicenseAcceptance": true,
