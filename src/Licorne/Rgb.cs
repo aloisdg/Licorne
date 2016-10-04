@@ -14,10 +14,10 @@ namespace Licorne {
             if (r < 0 || r > 255) throw new ArgumentOutOfRangeException (nameof (r));
             if (g < 0 || g > 255) throw new ArgumentOutOfRangeException (nameof (g));
             if (b < 0 || b > 255) throw new ArgumentOutOfRangeException (nameof (b));
-            R = r;
+            R = r;  
             G = g;
             B = b;
-        }
+        }   
 
         public Rgb(Rgb color) : this (color.R, color.G, color.B) { }
 

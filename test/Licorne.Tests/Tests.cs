@@ -10,7 +10,7 @@ namespace Tests
         [InlineData (288.8, 88, 51, 199, 20, 240)]
         [InlineData (0, 0, 100, 255, 255, 255)] //white
         [InlineData (0, 0, 0, 0, 0, 0)] //black
-        public void MyFirstTheory(double h, double s, double l, double r, double g, double b) {
+        public void Convert(double h, double s, double l, double r, double g, double b) {
             var expected = new Hsl (h, s, l);
             var actual = new Hsl (new Rgb (r, g, b));
             // Assert.Equal(expected, actual);
