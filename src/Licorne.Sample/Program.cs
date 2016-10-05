@@ -23,7 +23,6 @@ namespace Licorne.Sample {
                 var rgb = new Rgb (hsl);
                 Console.WriteLine ($"{hsl} => {rgb}");
             }
-            Console.ReadLine ();
         }
 
         private static IReadOnlyList<double> Convert(IEnumerable<string> args) {
