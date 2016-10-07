@@ -155,8 +155,10 @@ namespace Licorne {
             return hue;
         }
 
-        // todo: add comment
-        public static implicit operator Rgb(Hsl hsl) => new Rgb (hsl);
+        /// <summary>Converts an instance of a <see cref="T:Licorne.Rgb" /> structure from the specified <see cref="T:Licorne.Hsl" /> structure.</summary>
+        /// <returns>The <see cref="T:Licorne.Hsl" /> that this method converts.</returns>
+        /// <param name="color">The <see cref="T:Licorne.Rgb" /> from which to convert the new <see cref="T:Licorne.Hsl" />.</param>
+        public static implicit operator Hsl(Rgb color) => new Hsl (color);
 
         /// <summary>Converts this <see cref="T:Licorne.Hsl" /> structure to a human-readable string.</summary>
         /// <returns>A string that consists of the <see cref="T:Licorne.Hsl" /> component names and their values in CSS format.</returns>
