@@ -20,7 +20,7 @@ namespace Licorne.Sample {
             if (args[0] == "hsl") {
                 var values = Convert (args);
                 var hsl = new Hsl (values[0], values[1], values[2]);
-                var rgb = new Rgb (hsl);
+                var rgb = (Rgb) (hsl);
                 Console.WriteLine ($"{hsl} => {rgb}");
             }
         }
