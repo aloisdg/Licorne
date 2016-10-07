@@ -4,76 +4,101 @@
 using System;
 
 namespace Licorne {
-    public class Rgb : IEquatable<Rgb> {
+    /// <summary>Represents an RGB (red, green, blue) color.</summary>
+    public struct Rgb : IEquatable<Rgb> {
+        /// <summary>Gets the red component value of this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The red component value of this <see cref="T:Licorne.Rgb" />.</returns>
         public double R { get; }
+
+        /// <summary>Gets the green component value of this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The green component value of this <see cref="T:Licorne.Rgb" />.</returns>
         public double G { get; }
+
+        /// <summary>Gets the blue component value of this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The blue component value of this <see cref="T:Licorne.Rgb" />.</returns>
         public double B { get; }
 
-        public Rgb(double r, double g, double b) {
-            R = r;
-            G = g;
-            B = b;
+        /// <summary>Creates a <see cref="T:Licorne.Rgb" /> structure from the specified color values (red, green, and blue). Although this method allows a double value to be passed for each color component, the value of each component is limited to 8 bits.</summary>
+        /// <returns>The <see cref="T:Licorne.Rgb" /> that this method creates.</returns>
+        /// <param name="red">The red component value for the new <see cref="T:Licorne.Rgb" />. Valid values are 0 through 255. </param>
+        /// <param name="green">The green component value for the new <see cref="T:Licorne.Rgb" />. Valid values are 0 through 255. </param>
+        /// <param name="blue">The blue component value for the new <see cref="T:Licorne.Rgb" />. Valid values are 0 through 255. </param>
+        /// <exception cref="T:System.ArgumentOutOfRangeException">
+        /// <paramref name="red" />, <paramref name="green" />, or <paramref name="blue" /> is less than 0 or greater than 255.</exception>
+        public Rgb(double red, double green, double blue) {
+            if (red < byte.MinValue || red > byte.MaxValue)
+                throw new ArgumentOutOfRangeException (nameof (red));
+            if (green < byte.MinValue || green > byte.MaxValue)
+                throw new ArgumentOutOfRangeException (nameof (green));
+            if (blue < byte.MinValue || blue > byte.MaxValue)
+                throw new ArgumentOutOfRangeException (nameof (blue));
+            R = red;
+            G = green;
+            B = blue;
         }
 
+        /// <summary>Creates a <see cref="T:Licorne.Rgb" /> structure from the specified <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The <see cref="T:Licorne.Rgb" /> that this method creates.</returns>
+        /// <param name="color">The <see cref="T:Licorne.Rgb" /> from which to create the new <see cref="T:Licorne.Rgb" />.</param>
         public Rgb(Rgb color) : this (color.R, color.G, color.B) { }
 
+        /// <summary>Creates a <see cref="T:Licorne.Rgb" /> structure from the specified <see cref="T:Licorne.Hsl" /> structure.</summary>
+        /// <returns>The <see cref="T:Licorne.Rgb" /> that this method creates.</returns>
+        /// <param name="color">The <see cref="T:Licorne.Hsl" /> from which to create the new <see cref="T:Licorne.Rgb" />.</param>
         public Rgb(Hsl color) {
-            var rangedH = color.H / 360.0;
-            var r = 0.0;
-            var g = 0.0;
-            var b = 0.0;
-            var saturation = color.S / 100.0;
-            var luminosity = color.L / 100.0;
+            var rangedH = color.H / 360d;
+            var red = 0d;
+            var green = 0d;
+            var blue = 0d;
+            var saturation = color.S / 100d;
+            var luminosity = color.L / 100d;
 
             if (!luminosity.BasicallyEqualTo (0)) {
                 if (saturation.BasicallyEqualTo (0))
-                    r = g = b = luminosity;
+                    red = green = blue = luminosity;
                 else {
-                    var temp2 = luminosity * (luminosity < 0.5
-                        ? 1.0 + saturation
-                        : 1.0 - saturation + saturation / luminosity);
-                    var temp1 = 2.0 * luminosity - temp2;
+                    var temp2 = luminosity * (luminosity < .5
+                        ? 1d + saturation
+                        : 1d - saturation + saturation / luminosity);
+                    var temp1 = 2d * luminosity - temp2;
 
-                    r = GetColorComponent (temp1, temp2, rangedH + 1.0 / 3.0);
-                    g = GetColorComponent (temp1, temp2, rangedH);
-                    b = GetColorComponent (temp1, temp2, rangedH - 1.0 / 3.0);
+                    red = GetColorComponent (temp1, temp2, rangedH + 1d / 3d);
+                    green = GetColorComponent (temp1, temp2, rangedH);
+                    blue = GetColorComponent (temp1, temp2, rangedH - 1d / 3d);
                 }
             }
-            R = 255.0 * r;
-            G = 255.0 * g;
-            B = 255.0 * b;
+            R = 255d * red;
+            G = 255d * green;
+            B = 255d * blue;
         }
 
         private static double GetColorComponent(double temp1, double temp2, double temp3) {
-            var temp3InRange = temp3 + (temp3 < 0.0 ? 1 : (temp3 > 1.0 ? -1 : 0));
-            if (temp3InRange < 1.0 / 6.0)
-                return temp1 + (temp2 - temp1) * 6.0 * temp3InRange;
-            if (temp3InRange < 0.5)
-                return temp2;
-            if (temp3 < 2.0 / 3.0)
-                return temp1 + (temp2 - temp1) * 6.0 * (2.0 / 3.0 - temp3InRange);
+            var temp3InRange = temp3 + (temp3 < 0d ? 1 : (temp3 > 1d ? -1d : 0d));
+            if (temp3InRange < 1d / 6d) return temp1 + (temp2 - temp1) * 6d * temp3InRange;
+            if (temp3InRange < .5) return temp2;
+            if (temp3 < 2d / 3d) return temp1 + (temp2 - temp1) * 6d * (2d / 3d - temp3InRange);
             return temp1;
         }
 
-        public override string ToString() {
-            return $"rgb({R:#0},{G:#0},{B:#0})";
-        }
+        // todo: add comment
 
-        public override bool Equals(object obj) {
-            if (!(obj is Rgb))
-                return false;
-            var rgb = (Rgb) obj;
-            return R == rgb.R && G == rgb.G && B == rgb.B;
-        }
+        /// <summary>Converts an instance of <see cref="Licorne.Hsl"/> based on a <see cref="Licorne.Rgb"/>.</summary>
+        public static implicit operator Hsl(Rgb rgb) => new Hsl (rgb);
 
-        public bool Equals(Rgb other) {
-            if (ReferenceEquals (null, other))
-                return false;
-            if (ReferenceEquals (this, other))
-                return true;
-            return R.Equals (other.R) && G.Equals (other.G) && B.Equals (other.B);
-        }
+        /// <summary>Converts this <see cref="T:Licorne.Rgb" /> structure to a human-readable string.</summary>
+        /// <returns>A string that consists of the <see cref="T:Licorne.Rgb" /> component names and their values in CSS format.</returns>
+        public override string ToString() => $"rgb({R:#0},{G:#0},{B:#0})";
 
+        /// <summary>Tests whether the specified <see cref="T:Licorne.Rgb" /> is equivalent to this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>true if <paramref name="other" /> is equivalent to this <see cref="T:Licorne.Rgb" /> structure; otherwise, false.</returns>
+        public bool Equals(Rgb other) => R.Equals (other.R) && G.Equals (other.G) && B.Equals (other.B);
+
+        /// <summary>Tests whether the specified object is a <see cref="T:Licorne.Rgb" /> structure and is equivalent to this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>true if <paramref name="obj" /> is a <see cref="T:Licorne.Rgb" /> structure equivalent to this <see cref="T:Licorne.Rgb" /> structure; otherwise, false.</returns>
+        public override bool Equals(object obj) => obj is Rgb && Equals ((Rgb) obj);
+
+        /// <summary>Returns a hash code for this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>An integer value that specifies the hash code for this <see cref="T:Licorne.Rgb" />.</returns>
         public override int GetHashCode() {
             unchecked {
                 var hashCode = R.GetHashCode ();
@@ -83,12 +108,16 @@ namespace Licorne {
             }
         }
 
-        public static bool operator ==(Rgb left, Rgb right) {
-            return Equals (left, right);
-        }
+        /// <summary>Returns a value that indicates whether two specified <see cref="T:Licorne.Rgb" /> values are equal.</summary>
+        /// <returns>true if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, false.</returns>
+        /// <param name="left">The first value to compare. </param>
+        /// <param name="right">The second value to compare.</param>
+        public static bool operator ==(Rgb left, Rgb right) => Equals (left, right);
 
-        public static bool operator !=(Rgb left, Rgb right) {
-            return !Equals (left, right);
-        }
+        /// <summary>Returns a value that indicates whether two specified <see cref="T:Licorne.Rgb" /> values are not equal.</summary>
+        /// <returns>true if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, false.</returns>
+        /// <param name="left">The first value to compare.</param>
+        /// <param name="right">The second value to compare.</param>
+        public static bool operator !=(Rgb left, Rgb right) => !Equals (left, right);
     }
 }
