@@ -9,8 +9,8 @@ Licorne is a Little Color Reorganizer for the .Net Ecosystem.
 ### code
 
 ```C#
-Rgb rgb = new Rgb (13, 37, 42);
-Hsl hsl = new Hsl (rgb);
+var rgb = new Rgb (13, 37, 42);
+var hsl = new Hsl (rgb);
 Console.WriteLine(hsl);
 ```
 
