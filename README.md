@@ -57,4 +57,4 @@ The logo is made after [Bohdan Burmich's work](https://thenounproject.com/term/u
 
 ## License
 
-Licorne is released under the MPL2 License. See the [bundled LICENSE](https://github.com/aloisdg/Licorne/blob/master/License) file for details.
+Licorne is released under the MPL2 License. See the [bundled LICENSE](https://github.com/aloisdg/Licorne/blob/master/License) file for details or the MPL2's [FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
