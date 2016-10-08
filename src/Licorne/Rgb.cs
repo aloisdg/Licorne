@@ -61,7 +61,6 @@ namespace Licorne {
                         ? 1d + saturation
                         : 1d - saturation + saturation / luminosity);
                     var temp1 = 2d * luminosity - temp2;
-
                     red = GetColorComponent (temp1, temp2, rangedH + 1d / 3d);
                     green = GetColorComponent (temp1, temp2, rangedH);
                     blue = GetColorComponent (temp1, temp2, rangedH - 1d / 3d);
@@ -91,7 +90,9 @@ namespace Licorne {
 
         /// <summary>Tests whether the specified <see cref="T:Licorne.Rgb" /> is equivalent to this <see cref="T:Licorne.Rgb" /> structure.</summary>
         /// <returns>true if <paramref name="other" /> is equivalent to this <see cref="T:Licorne.Rgb" /> structure; otherwise, false.</returns>
-        public bool Equals(Rgb other) => R.Equals (other.R) && G.Equals (other.G) && B.Equals (other.B);
+        public bool Equals(Rgb other) => R.BasicallyEqualTo (other.R, .2)
+            && G.BasicallyEqualTo (other.G, .2)
+            && B.BasicallyEqualTo (other.B, .2);
 
         /// <summary>Tests whether the specified object is a <see cref="T:Licorne.Rgb" /> structure and is equivalent to this <see cref="T:Licorne.Rgb" /> structure.</summary>
         /// <returns>true if <paramref name="obj" /> is a <see cref="T:Licorne.Rgb" /> structure equivalent to this <see cref="T:Licorne.Rgb" /> structure; otherwise, false.</returns>

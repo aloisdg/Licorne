@@ -6,11 +6,11 @@ namespace Licorne {
         /// <summary>Gets the hue component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The hue component value of this <see cref="T:Licorne.Hsl" />.</returns>
         public double H { get; }
-        
+
         /// <summary>Gets the saturation component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The saturation component value of this <see cref="T:Licorne.Hsl" />.</returns>
         public double S { get; }
-        
+
         /// <summary>Gets the luminosity component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The luminosity component value of this <see cref="T:Licorne.Hsl" />.</returns>
         public double L { get; }
@@ -73,6 +73,8 @@ namespace Licorne {
         /// The Hue-Saturation-Brightness (HSB) saturation for this
         ///</summary>
         private static double GetSaturation(Rgb rgb) {
+            const int greySaturation = 0;
+
             var r = rgb.R / 255d;
             var g = rgb.G / 255d;
             var b = rgb.B / 255d;
@@ -84,7 +86,6 @@ namespace Licorne {
                 max = g;
             if (b > max)
                 max = b;
-
             if (g < min)
                 min = g;
             if (b < min)
@@ -92,22 +93,21 @@ namespace Licorne {
 
             // if max == min, then there is no color and
             // the saturation is zero.
-            // todo: Fix warning
-            // we are using double so we should compare with a BasicallyEquals
-            if (max == min)
-                return 0;
+            if (max.BasicallyEqualTo (min))
+                return greySaturation;
             var l = (max + min) / 2;
-            var s = (max - min) / (l <= .5 ? (max + min) : (2 - max - min)); // double
+            var s = (max - min) / (l <= .5 ? max + min : (2 - max - min)); // double
             return s;
         }
 
         /// <summary>Gets the hue value, in degrees, for this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The hue, in degrees, of this <see cref="T:Licorne.Hsl" />. The hue is measured in degrees, ranging from 0.0 through 360.0, in HSL color space.</returns>
         private static double GetHue(Rgb rgb) {
-            // todo: Fix warning
-            // we are using double so we should compare with a BasicallyEquals
-            if (rgb.R == rgb.G && rgb.G == rgb.B)
-                return 0; // 0 makes as good an UNDEFINED value as any
+            // 0 makes as good an UNDEFINED value as any
+            const int greyHue = 0;
+
+            if (rgb.R.BasicallyEqualTo (rgb.G) && rgb.G.BasicallyEqualTo (rgb.B))
+                return greyHue;
 
             var r = rgb.R / 255d;
             var g = rgb.G / 255d;
@@ -132,19 +132,13 @@ namespace Licorne {
 
             delta = max - min;
 
-            // todo: Fix warning
-            // we are using double so we should compare with a BasicallyEquals
-            if (r == max) {
-                hue = (g - b) / delta;
+            if (r.BasicallyEqualTo (max)) {
+                hue = 0 + (g - b) / delta;
             }
-            // todo: Fix warning
-            // we are using double so we should compare with a BasicallyEquals
-            else if (g == max) {
+            else if (g.BasicallyEqualTo (max)) {
                 hue = 2 + (b - r) / delta;
             }
-            // todo: Fix warning
-            // we are using double so we should compare with a BasicallyEquals
-            else if (b == max) {
+            else if (b.BasicallyEqualTo (max)) {
                 hue = 4 + (r - g) / delta;
             }
             hue *= 60;
@@ -166,7 +160,9 @@ namespace Licorne {
 
         /// <summary>Tests whether the specified <see cref="T:Licorne.Hsl" /> is equivalent to this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>true if <paramref name="other" /> is equivalent to this <see cref="T:Licorne.Hsl" /> structure; otherwise, false.</returns>
-        public bool Equals(Hsl other) => H.Equals (other.H) && S.Equals (other.S) && L.Equals (other.L);
+        public bool Equals(Hsl other) => H.BasicallyEqualTo (other.H, .2)
+            && S.BasicallyEqualTo (other.S, .2)
+            && L.BasicallyEqualTo (other.L, .2);
 
         /// <summary>Tests whether the specified object is a <see cref="T:Licorne.Hsl" /> structure and is equivalent to this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>true if <paramref name="obj" /> is a <see cref="T:Licorne.Hsl" /> structure equivalent to this <see cref="T:Licorne.Hsl" /> structure; otherwise, false.</returns>
