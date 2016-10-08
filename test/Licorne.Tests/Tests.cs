@@ -4,35 +4,87 @@ using Xunit;
 
 namespace Tests {
     public class Tests {
+        //todo: fixed commented test
         [Theory]
         [InlineData (288.8, 88, 51, 199, 20, 240)]
         [InlineData (0, 0, 100, 255, 255, 255)] //white
         [InlineData (0, 0, 0, 0, 0, 0)] //black
-        //[InlineData (120, 1, 6, 15, 15, 15)] //grey // rgb(15,15,15) => hsl(0,0%,5.88%)
-        //[InlineData (120, 24, 97, 246, 249, 246)] // rgb(246,249,246) => hsl(120,20%,97.06%)
+        [InlineData (0, 25, 25, 80, 48, 48)]
+        //[InlineData (0, 25, 50, 159, 96, 96)]
+        [InlineData (0, 25, 75, 207, 175, 175)]
+        [InlineData (0, 50, 25, 96, 32, 32)]
+        [InlineData (0, 50, 50, 191, 64, 64)]
+        [InlineData (0, 50, 75, 223, 159, 159)]
+        [InlineData (0, 75, 25, 112, 16, 16)]
+        [InlineData (0, 75, 50, 223, 32, 32)]
+        [InlineData (0, 75, 75, 239, 143, 143)]
+        [InlineData (0, 100, 25, 128, 0, 0)]
+        [InlineData (0, 100, 50, 255, 0, 0)]
+        [InlineData (0, 100, 75, 255, 128, 128)]
+        [InlineData (60, 25, 25, 80, 80, 48)]
+        //[InlineData (60, 25, 50, 159, 159, 96)]
+        [InlineData (60, 25, 75, 207, 207, 175)]
+        [InlineData (60, 50, 25, 96, 96, 32)]
+        [InlineData (60, 50, 50, 191, 191, 64)]
+        [InlineData (60, 50, 75, 223, 223, 159)]
+        [InlineData (60, 75, 25, 112, 112, 16)]
+        [InlineData (60, 75, 50, 223, 223, 32)]
+        [InlineData (60, 75, 75, 239, 239, 143)]
+        [InlineData (60, 100, 25, 128, 128, 0)]
+        [InlineData (60, 100, 50, 255, 255, 0)]
+        [InlineData (60, 100, 75, 255, 255, 128)]
+        [InlineData (120, 25, 25, 48, 80, 48)]
+        //[InlineData (120, 25, 50, 96, 159, 96)]
+        [InlineData (120, 25, 75, 175, 207, 175)]
+        [InlineData (120, 50, 25, 32, 96, 32)]
+        [InlineData (120, 50, 50, 64, 191, 64)]
+        [InlineData (120, 50, 75, 159, 223, 159)]
+        [InlineData (120, 75, 25, 16, 112, 16)]
+        [InlineData (120, 75, 50, 32, 223, 32)]
+        [InlineData (120, 75, 75, 143, 239, 143)]
+        [InlineData (120, 100, 25, 0, 128, 0)]
+        [InlineData (120, 100, 50, 0, 255, 0)]
+        [InlineData (120, 100, 75, 128, 255, 128)]
+        [InlineData (180, 25, 25, 48, 80, 80)]
+        //[InlineData (180, 25, 50, 96, 159, 159)]
+        [InlineData (180, 25, 75, 175, 207, 207)]
+        [InlineData (180, 50, 25, 32, 96, 96)]
+        [InlineData (180, 50, 50, 64, 191, 191)]
+        [InlineData (180, 50, 75, 159, 223, 223)]
+        [InlineData (180, 75, 25, 16, 112, 112)]
+        [InlineData (180, 75, 50, 32, 223, 223)]
+        [InlineData (180, 75, 75, 143, 239, 239)]
+        [InlineData (180, 100, 25, 0, 128, 128)]
+        [InlineData (180, 100, 50, 0, 255, 255)]
+        [InlineData (180, 100, 75, 128, 255, 255)]
+        [InlineData (240, 25, 25, 48, 48, 80)]
+        //[InlineData (240, 25, 50, 96, 96, 159)]
+        [InlineData (240, 25, 75, 175, 175, 207)]
+        [InlineData (240, 50, 25, 32, 32, 96)]
+        [InlineData (240, 50, 50, 64, 64, 191)]
+        [InlineData (240, 50, 75, 159, 159, 223)]
+        [InlineData (240, 75, 25, 16, 16, 112)]
+        [InlineData (240, 75, 50, 32, 32, 223)]
+        [InlineData (240, 75, 75, 143, 143, 239)]
+        [InlineData (240, 100, 25, 0, 0, 128)]
+        [InlineData (240, 100, 50, 0, 0, 255)]
+        [InlineData (240, 100, 75, 128, 128, 255)]
+        [InlineData (300, 25, 25, 80, 48, 80)]
+        //[InlineData (300, 25, 50, 159, 96, 159)]
+        [InlineData (300, 25, 75, 207, 175, 207)]
+        [InlineData (300, 50, 25, 96, 32, 96)]
+        [InlineData (300, 50, 50, 191, 64, 191)]
+        [InlineData (300, 50, 75, 223, 159, 223)]
+        [InlineData (300, 75, 25, 112, 16, 112)]
+        [InlineData (300, 75, 50, 223, 32, 223)]
+        [InlineData (300, 75, 75, 239, 143, 239)]
+        [InlineData (300, 100, 25, 128, 0, 128)]
+        [InlineData (300, 100, 50, 255, 0, 255)]
+        [InlineData (300, 100, 75, 255, 128, 255)]
         public void Convert(double h, double s, double l, double r, double g, double b) {
             var expected = new Hsl (h, s, l);
             var actual = new Hsl (new Rgb (r, g, b));
-            // Assert.Equal(expected, actual);
-
-            Assert.True (BasicallyEquals (expected, actual));
-        }
-
-        public static bool BasicallyEquals(Hsl one, Hsl two) {
-            return one.H - two.H < 1
-                   && one.S - two.S < 1
-                   && one.L - two.L < 1;
-        }
-        [Theory]
-        [InlineData (120, 1, 6, 15, 15, 15)] //grey // rgb(15,15,15) => hsl(0,0%,5.88%)
-        public static void TryGrey(double h, double s, double l, double r, double g, double b) {
-            var expected = new Hsl (h, s, l);
-            var actual = new Hsl (new Rgb (r, g, b));
-            // Assert.Equal(expected, actual);
-
-            Assert.Equal (expected.H, actual.H, 1);
-            Assert.Equal (expected.S, actual.S, 1);
-            Assert.Equal (expected.L, actual.L, 1);
+            Assert.Equal (expected, actual);
         }
     }
 }

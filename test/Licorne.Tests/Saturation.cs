@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Xunit;
 
 namespace Licorne.Tests {
@@ -28,14 +29,12 @@ namespace Licorne.Tests {
         public void Convert(double h, double s, double l, double r, double g, double b) {
             var expected = new Hsl (h, s, l);
             var actual = new Hsl (new Rgb (r, g, b));
-            // Assert.Equal(expected, actual);
-            Assert.True (BasicallyEquals (expected, actual));
-        }
+            //Assert.Equal (expected, actual);
+            const double precision = .4;
 
-        public static bool BasicallyEquals(Hsl one, Hsl two) {
-            return one.H - two.H < 1
-                   && one.S - two.S < 1
-                   && one.L - two.L < 1;
+            Assert.True (Math.Abs ((double) (expected.H - actual.H)) <= precision);
+            Assert.True (Math.Abs ((double) (expected.S - actual.S)) <= precision);
+            Assert.True (Math.Abs ((double) (expected.L - actual.L)) <= precision);
         }
     }
 }
