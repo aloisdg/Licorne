@@ -8,15 +8,15 @@ namespace Licorne {
     public struct Rgb : IEquatable<Rgb> {
         /// <summary>Gets the red component value of this <see cref="T:Licorne.Rgb" /> structure.</summary>
         /// <returns>The red component value of this <see cref="T:Licorne.Rgb" />.</returns>
-        public double R { get; }
+        public readonly double R;
 
         /// <summary>Gets the green component value of this <see cref="T:Licorne.Rgb" /> structure.</summary>
         /// <returns>The green component value of this <see cref="T:Licorne.Rgb" />.</returns>
-        public double G { get; }
+        public readonly double G;
 
         /// <summary>Gets the blue component value of this <see cref="T:Licorne.Rgb" /> structure.</summary>
         /// <returns>The blue component value of this <see cref="T:Licorne.Rgb" />.</returns>
-        public double B { get; }
+        public readonly double B;
 
         /// <summary>Creates a <see cref="T:Licorne.Rgb" /> structure from the specified color values (red, green, and blue). Although this method allows a double value to be passed for each color component, the value of each component is limited to 8 bits.</summary>
         /// <returns>The <see cref="T:Licorne.Rgb" /> that this method creates.</returns>

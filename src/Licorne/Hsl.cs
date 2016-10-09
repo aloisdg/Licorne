@@ -5,15 +5,15 @@ namespace Licorne {
     public struct Hsl : IEquatable<Hsl> {
         /// <summary>Gets the hue component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The hue component value of this <see cref="T:Licorne.Hsl" />.</returns>
-        public double H { get; }
+        public readonly double H;
 
         /// <summary>Gets the saturation component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The saturation component value of this <see cref="T:Licorne.Hsl" />.</returns>
-        public double S { get; }
+        public readonly double S;
 
         /// <summary>Gets the luminosity component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
         /// <returns>The luminosity component value of this <see cref="T:Licorne.Hsl" />.</returns>
-        public double L { get; }
+        public readonly double L;
 
         /// <summary>Creates a <see cref="T:Licorne.Hsl" /> structure from the specified color values (hue, luminosity, and saturation).</summary>
         /// <returns>The <see cref="T:Licorne.Hsl" /> that this method creates.</returns>
