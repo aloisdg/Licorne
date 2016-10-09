@@ -3,15 +3,15 @@
 namespace Licorne {
     /// <summary>Represents an HSL (hue, saturation, luminosity) color.</summary>
     public struct Hsl : IEquatable<Hsl> {
-        /// <summary>Gets the hue component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
+        /// <summary>Gets the hue component value of this <see cref="T:Licorne.Hsl" /> structure. This field is read-only.</summary>
         /// <returns>The hue component value of this <see cref="T:Licorne.Hsl" />.</returns>
         public readonly double H;
 
-        /// <summary>Gets the saturation component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
+        /// <summary>Gets the saturation component value of this <see cref="T:Licorne.Hsl" /> structure. This field is read-only.</summary>
         /// <returns>The saturation component value of this <see cref="T:Licorne.Hsl" />.</returns>
         public readonly double S;
 
-        /// <summary>Gets the luminosity component value of this <see cref="T:Licorne.Hsl" /> structure.</summary>
+        /// <summary>Gets the luminosity component value of this <see cref="T:Licorne.Hsl" /> structure. This field is read-only.</summary>
         /// <returns>The luminosity component value of this <see cref="T:Licorne.Hsl" />.</returns>
         public readonly double L;
 
@@ -23,11 +23,11 @@ namespace Licorne {
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// <paramref name="hue" />, <paramref name="saturation" />, or <paramref name="luminosity" /> is out of its range.</exception>
         public Hsl(double hue, double saturation, double luminosity) {
-            if (hue < 0 || hue > 360)
+            if (hue < Degree.MinDegree || hue > Degree.MaxDegree)
                 throw new ArgumentOutOfRangeException (nameof (hue));
-            if (saturation < 0 || saturation > 100)
+            if (saturation < Percent.MinValue || saturation > Percent.MaxValue)
                 throw new ArgumentOutOfRangeException (nameof (saturation));
-            if (luminosity < 0 || luminosity > 100)
+            if (luminosity < Percent.MinValue || luminosity > Percent.MaxValue)
                 throw new ArgumentOutOfRangeException (nameof (luminosity));
             H = hue;
             S = saturation;
