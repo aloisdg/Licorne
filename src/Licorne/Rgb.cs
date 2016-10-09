@@ -23,11 +23,11 @@ namespace Licorne {
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// <paramref name="red" />, <paramref name="green" />, or <paramref name="blue" /> is less than 0 or greater than 255.</exception>
         public Rgb(double red, double green, double blue) {
-            if (red < byte.MinValue || red > byte.MaxValue)
+            if (byte.MinValue <= red && red <= byte.MaxValue)
                 throw new ArgumentOutOfRangeException (nameof (red));
-            if (green < byte.MinValue || green > byte.MaxValue)
+            if (byte.MinValue <= green && green <= byte.MaxValue)
                 throw new ArgumentOutOfRangeException (nameof (green));
-            if (blue < byte.MinValue || blue > byte.MaxValue)
+            if (byte.MinValue <= blue && blue <= byte.MaxValue)
                 throw new ArgumentOutOfRangeException (nameof (blue));
             R = red;
             G = green;
@@ -70,9 +70,12 @@ namespace Licorne {
 
         private static double GetColorComponent(double temp1, double temp2, double temp3) {
             var temp3InRange = temp3 + (temp3 < 0d ? 1 : (temp3 > 1d ? -1d : 0d));
-            if (temp3InRange < 1d / 6d) return temp1 + (temp2 - temp1) * 6d * temp3InRange;
-            if (temp3InRange < .5) return temp2;
-            if (temp3 < 2d / 3d) return temp1 + (temp2 - temp1) * 6d * (2d / 3d - temp3InRange);
+            if (temp3InRange < 1d / 6d)
+                return temp1 + (temp2 - temp1) * 6d * temp3InRange;
+            if (temp3InRange < .5)
+                return temp2;
+            if (temp3 < 2d / 3d)
+                return temp1 + (temp2 - temp1) * 6d * (2d / 3d - temp3InRange);
             return temp1;
         }
 
