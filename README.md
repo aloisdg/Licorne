@@ -1,8 +1,6 @@
-# Licorne
+# &zwnj;![Licorne colorful logo](logo.png) Licorne
 
-![Licorn colorful logo](logo.png)
-
-Licorne is a Little Color Reorganizer for the .Net Ecosystem.
+Licorne is my Ideal Converter Olive-sized Rgb/hsl for the .Net Ecosystem.
 
 ## Sample
 
@@ -30,7 +28,7 @@ You can install Licorne as [a nuget package](https://nuget.org/packages/Licorne)
 
 ### Suit my need
 
-Their are a lot of [implemen](https://github.com/Litipk/ColorSharp)[tation](https://github.com/THEjoezack/ColorMine) of HSL out there, but I was looking for something small, easy, and widely tested. I needed quickly a version working with Universal Apps (school project stuff). Finally, I like to build stuff. Licorne was originally a part of [Harmony](https://github.com/aloisdg/Harmony/), but I extract it in a library to use it in different place.
+Their are a lot of [implemen](https://github.com/Litipk/ColorSharp)[tation](https://github.com/THEjoezack/ColorMine) of HSL out there, but I was looking for something small, easy, and widely tested. I needed quickly a version working with Universal Apps (school project stuff). Finally, I like to build stuff. I always learn more by doing. Licorne was originally a part of [Harmony](https://github.com/aloisdg/Harmony/), but I extract it in a library to use it in different place.
 
 ### Yes but why this name?
 
