@@ -8,10 +8,7 @@
     "Licorne": {
       "target": "project"
     },
-    "Microsoft.NETCore.App": {
-      "type": "platform",
-      "version": "1.0.0"
-    }
+    "Microsoft.NETCore.App": "1.0.1"
   },
 
   "frameworks": {
