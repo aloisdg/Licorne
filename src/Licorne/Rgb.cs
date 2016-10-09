@@ -23,11 +23,11 @@ namespace Licorne {
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// <paramref name="red" />, <paramref name="green" />, or <paramref name="blue" /> is less than 0 or greater than 255.</exception>
         public Rgb(double red, double green, double blue) {
-            if (byte.MinValue <= red && red <= byte.MaxValue)
+            if (red < byte.MinValue || byte.MaxValue < red)
                 throw new ArgumentOutOfRangeException (nameof (red));
-            if (byte.MinValue <= green && green <= byte.MaxValue)
+            if (green < byte.MinValue || byte.MaxValue < green)
                 throw new ArgumentOutOfRangeException (nameof (green));
-            if (byte.MinValue <= blue && blue <= byte.MaxValue)
+            if (blue < byte.MinValue || byte.MaxValue < blue)
                 throw new ArgumentOutOfRangeException (nameof (blue));
             R = red;
             G = green;

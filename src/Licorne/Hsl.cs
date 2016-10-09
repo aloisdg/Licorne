@@ -23,11 +23,11 @@ namespace Licorne {
         /// <exception cref="T:System.ArgumentOutOfRangeException">
         /// <paramref name="hue" />, <paramref name="saturation" />, or <paramref name="luminosity" /> is out of its range.</exception>
         public Hsl(double hue, double saturation, double luminosity) {
-            if (Degree.MinDegree <= hue && hue <= Degree.MaxDegree)
+            if (hue < Degree.MinValue || Degree.MaxValue < hue)
                 throw new ArgumentOutOfRangeException (nameof (hue));
-            if (Percent.MinValue <= saturation && saturation <= Percent.MaxValue)
+            if (saturation < Percent.MinValue || Percent.MaxValue < saturation)
                 throw new ArgumentOutOfRangeException (nameof (saturation));
-            if (Percent.MinValue <= luminosity && luminosity <= Percent.MaxValue)
+            if (luminosity < Percent.MinValue || Percent.MaxValue < luminosity)
                 throw new ArgumentOutOfRangeException (nameof (luminosity));
             H = hue;
             S = saturation;
