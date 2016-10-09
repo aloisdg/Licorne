@@ -1,6 +1,3 @@
-// Licorne Is Colors Of Rgb Naturally Easy
-// LIght COlor Rendered Naive & Easy
-
 using System;
 
 namespace Licorne {
