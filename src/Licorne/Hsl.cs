@@ -44,11 +44,12 @@ namespace Licorne {
         /// <param name="color">The <see cref="T:Licorne.Rgb" /> from which to create the new <see cref="T:Licorne.Hsl" />.</param>
         public Hsl(Rgb color) : this (GetHue (color)
             , GetSaturation (color) * 100d
-            , GetBrightness (color) * 100d) { }
+            , GetLuminosity (color) * 100d) { }
 
-        /// <summary>Gets the hue-saturation-brightness (HSB) brightness value for this <see cref="T:Licorne.Hsl" /> structure.</summary>
-        /// <returns>The brightness of this <see cref="T:Licorne.Hsl" />. The brightness ranges from 0.0 through 100.0, where 0.0 represents black and 100.0 represents white.</returns>
-        private static double GetBrightness(Rgb rgb) {
+        /// <summary>Gets the luminosity value, in percentages, for this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The luminosity, in percentages, of this <see cref="T:Licorne.Rgb" />. The luminosity is measured in percentages, ranging from 0.0 through 100.0, in HSL color space.</returns>
+        /// <param name="rgb">The <see cref="T:Licorne.Rgb" /> from which to get the luminosity.</param>
+        private static double GetLuminosity(Rgb rgb) {
             var r = rgb.R / 255d;
             var g = rgb.G / 255d;
             var b = rgb.B / 255d;
@@ -69,9 +70,9 @@ namespace Licorne {
             return (max + min) / 2;
         }
 
-        ///<summary>
-        /// The Hue-Saturation-Brightness (HSB) saturation for this
-        ///</summary>
+        /// <summary>Gets the saturation value, in percentages, for this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The saturation, in percentages, of this <see cref="T:Licorne.Rgb" />. The saturation is measured in percentages, ranging from 0.0 through 100.0, in HSL color space.</returns>
+        /// <param name="rgb">The <see cref="T:Licorne.Rgb" /> from which to get the saturation.</param>
         private static double GetSaturation(Rgb rgb) {
             const int greySaturation = 0;
 
@@ -100,8 +101,9 @@ namespace Licorne {
             return s;
         }
 
-        /// <summary>Gets the hue value, in degrees, for this <see cref="T:Licorne.Hsl" /> structure.</summary>
-        /// <returns>The hue, in degrees, of this <see cref="T:Licorne.Hsl" />. The hue is measured in degrees, ranging from 0.0 through 360.0, in HSL color space.</returns>
+        /// <summary>Gets the hue value, in degrees, for this <see cref="T:Licorne.Rgb" /> structure.</summary>
+        /// <returns>The hue, in degrees, of this <see cref="T:Licorne.Rgb" />. The hue is measured in degrees, ranging from 0.0 through 360.0, in HSL color space.</returns>
+        /// <param name="rgb">The <see cref="T:Licorne.Rgb" /> from which to get the hue.</param>
         private static double GetHue(Rgb rgb) {
             // 0 makes as good an UNDEFINED value as any
             const int greyHue = 0;
