@@ -1,6 +1,9 @@
-﻿using Xunit;
+using System;
+using Xunit;
+using Licorne;
 
-namespace Licorne.Tests {
+namespace test
+{
     public class Tests {
         //todo: fixed commented test
         [Theory]

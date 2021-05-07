@@ -10,7 +10,7 @@ namespace Tests {
         [InlineData (42, 42, 42)]
         [InlineData (100, 100, 100)]
         [InlineData (255, 100, 100)]
-        public void TryInt(byte a, byte b, byte c) {
+        public void TryByte(byte a, byte b, byte c) {
             var expected = new[] { a, b, c };
             var hsl = new Hsl (a, b, c);
             var actual = new double[] { hsl.H, hsl.S, hsl.L }.Select (Convert.ToByte).ToArray ();

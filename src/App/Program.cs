@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Licorne;
 
-namespace Licorne.Sample {
-    public class Program {
+namespace App {
+    class Program {
         public static void Main(string[] args) {
             if (args.Length != 4) {
                 Console.WriteLine ("Usage: rgb|hsl r|h g|s b|l");
